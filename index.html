@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sabbir Saown — Data Analyst</title>
 <meta name="description" content="Sabbir Saown is a data analyst in London building models, dashboards and tools that turn messy data into decisions.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-IDl+9tdLl24P7NBDOmXGv+2OKZzZ50xmz1kFCQY0JvA='; style-src 'sha256-JZt3XL2i2ED4AWeIjmKAgyE0vn+FXyaZ34VQA6v0Mes=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#07080c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,6 +101,9 @@
   .contact .links { justify-content: center; margin-top: 44px; }
   footer { display: flex; justify-content: space-between; margin-top: 110px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 
+  .noscript-note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .archive-block { max-width: 560px; }
+
   /* Progress */
   .rail { position: fixed; right: 28px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; gap: 12px; }
   .rail a { display: block; width: 18px; height: 2px; background: rgba(255,255,255,.18); transition: width .4s, background .4s; margin-left: auto; }
@@ -150,7 +155,7 @@
         <p class="lede">I turn messy data into <strong>models, dashboards and tools</strong> that people actually use, from quantitative finance to NLP to automation.</p>
         <div class="actions">
           <a class="btn primary" href="#work">View work</a>
-          <a class="btn ghost" href="mailto:saowns02@gmail.com">Get in touch
+          <a class="btn ghost js-mail" href="#contact">Get in touch
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
         </div>
       </div>
@@ -251,7 +256,7 @@
 
   <section class="chapter" id="archive" data-shape="terrain" data-label="Archive">
     <div class="wrap">
-      <div class="project archive-block" style="max-width:560px">
+      <div class="project archive-block">
         <div class="label"><b>Archive</b><span>Earlier work &amp; toolkit</span></div>
         <h3>Smaller builds</h3>
         <ul class="archive">
@@ -277,7 +282,7 @@
         <div class="label">Contact</div>
         <h2>Let's work together.</h2>
         <p>Have data that needs a second look? I'd like to hear about it.</p>
-        <a class="mail" href="mailto:saowns02@gmail.com">saowns02@gmail.com</a>
+        <a class="mail js-mail js-mail-text" href="#contact">saowns02 (at) gmail (dot) com</a>
         <div class="links">
           <a class="link" href="https://www.linkedin.com/in/sabbir-saown-b97545225/" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
           <a class="link" href="https://github.com/saowns02" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
@@ -630,6 +635,19 @@
     es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); pio.unobserve(en.target); } });
   }, { threshold: 0.2 });
   document.querySelectorAll('.project').forEach(function (p) { pio.observe(p); });
+
+  // Email is assembled here so bots reading the HTML source don't find it
+  (function () {
+    var parts = ['moc.liamg', '20snwoas'], rev = function (x) { return x.split('').reverse().join(''); };
+    var addr = rev(parts[1]) + String.fromCharCode(64) + rev(parts[0]);
+    document.querySelectorAll('.js-mail').forEach(function (a) {
+      a.href = 'mailto:' + addr;
+      if (a.classList.contains('js-mail-text')) a.textContent = addr;
+    });
+  })();
+
+  // Don't allow this page to be shown inside another site's frame (clickjacking)
+  if (window.top !== window.self) { try { window.top.location = window.self.location.href; } catch (e) { document.documentElement.style.display = 'none'; } }
 
   resize();
   requestAnimationFrame(function (n) { last = n; frame(n); });
