@@ -4,368 +4,636 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sabbir Saown — Data Analyst</title>
-<meta name="description" content="Sabbir Saown, data analyst in London. Selected projects in analytics, machine learning, dashboards and automation.">
+<meta name="description" content="Sabbir Saown is a data analyst in London building models, dashboards and tools that turn messy data into decisions.">
+<meta name="theme-color" content="#07080c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f3efe6;
-    --ink: #1a1816;
-    --muted: #6b655c;
-    --rule: #d8d1c3;
-    --accent: #b8432a;
-    --serif: "Fraunces", Georgia, "Times New Roman", serif;
-    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --bg: #07080c;
+    --ink: #eef0f5;
+    --body: #a9aebd;
+    --muted: #6f7486;
+    --line: rgba(255,255,255,.08);
+    --accent: #67e8f9;
+    --accent-2: #818cf8;
+    --display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #14130f;
-      --ink: #ece6d9;
-      --muted: #9a9385;
-      --rule: #2e2b25;
-      --accent: #e0714f;
-    }
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--serif);
-    font-size: 18px;
-    line-height: 1.55;
-    font-optical-sizing: auto;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; }
-  ::selection { background: var(--accent); color: var(--paper); }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.65; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--bg); }
 
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-  .mono { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; }
+  #field { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
+  .shade { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at 65% 45%, transparent 35%, rgba(7,8,12,.8) 100%); }
+  main { position: relative; z-index: 2; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
+  .label { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .label b { color: var(--accent); font-weight: 500; }
 
-  /* Top bar */
-  header.bar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 28px 0; border-bottom: 1px solid var(--rule);
-  }
-  header.bar nav { display: flex; gap: 28px; }
-  header.bar a { text-decoration: none; }
-  header.bar a:hover { color: var(--accent); }
-  .status { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
-  .status i {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse { 50% { opacity: .25; } }
+  /* Header */
+  header { position: fixed; top: 0; left: 0; right: 0; z-index: 10; transition: background .4s, border-color .4s; border-bottom: 1px solid transparent; }
+  header.solid { background: rgba(7,8,12,.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: var(--line); }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; height: 72px; }
+  .brand { font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; }
+  header nav { display: flex; gap: 32px; font-size: 14px; color: var(--body); }
+  header nav a { transition: color .2s; }
+  header nav a:hover { color: var(--ink); }
 
   /* Hero */
-  .hero { padding: 120px 0 96px; position: relative; }
-  .hero h1 {
-    font-weight: 300;
-    font-size: clamp(56px, 11vw, 148px);
-    line-height: .92;
-    letter-spacing: -0.035em;
-  }
-  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
-  .hero-meta {
-    display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px;
-    margin-top: 64px; align-items: end;
-  }
-  .hero-meta p { font-size: 22px; line-height: 1.45; max-width: 30ch; font-weight: 350; }
-  .facts { list-style: none; border-top: 1px solid var(--rule); }
-  .facts li {
-    display: flex; justify-content: space-between; gap: 16px;
-    padding: 12px 0; border-bottom: 1px solid var(--rule);
-  }
-  .facts li span:first-child { color: var(--muted); }
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; }
+  .hero-text { max-width: 600px; }
+  .status { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .status i { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.15); }
+  .hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(52px, 8vw, 104px); line-height: .98; letter-spacing: -.035em; }
+  .hero h1 span { color: var(--muted); }
+  .lede { font-size: clamp(18px, 1.6vw, 21px); color: var(--body); margin: 28px 0 40px; max-width: 30em; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 22px; border-radius: 999px; font-size: 14px; font-weight: 500; transition: background .25s, color .25s, border-color .25s, transform .25s; }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.primary:hover { background: var(--accent); }
+  .btn.ghost { border: 1px solid rgba(255,255,255,.18); }
+  .btn.ghost:hover { border-color: var(--ink); }
+  .btn svg { width: 14px; height: 14px; transition: transform .25s; }
+  .btn:hover svg { transform: translate(2px,-2px); }
 
-  /* The signature line: a slow-drawing trace across the page */
-  .trace { display: block; width: 100%; height: 80px; margin-top: 72px; overflow: visible; }
-  .trace path {
-    fill: none; stroke: var(--accent); stroke-width: 1.5;
-    stroke-dasharray: 2400; stroke-dashoffset: 2400;
-    animation: draw 3.2s cubic-bezier(.6,.1,.2,1) .3s forwards;
-  }
-  .trace circle { fill: var(--accent); opacity: 0; animation: appear .4s ease 3.3s forwards; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  @keyframes appear { to { opacity: 1; } }
+  /* Work */
+  .intro { padding: 40px 0 0; }
+  .intro h2 { font-family: var(--display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); letter-spacing: -.025em; line-height: 1.1; margin-top: 14px; max-width: 14em; }
+  .chapter { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
+  .project { max-width: 480px; opacity: 0; transform: translateY(32px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .project.in { opacity: 1; transform: none; }
+  .project .label { display: flex; gap: 14px; margin-bottom: 20px; }
+  .project h3 { font-family: var(--display); font-weight: 600; font-size: clamp(32px, 3.6vw, 46px); line-height: 1.05; letter-spacing: -.025em; margin-bottom: 18px; }
+  .project p { color: var(--body); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 30px; }
+  .tags span { font-family: var(--mono); font-size: 12px; color: var(--body); padding: 5px 11px; border: 1px solid var(--line); border-radius: 6px; background: rgba(255,255,255,.02); }
+  .links { display: flex; gap: 28px; flex-wrap: wrap; }
+  .link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.2); transition: border-color .25s, color .25s; }
+  .link:hover { color: var(--accent); border-color: var(--accent); }
+  .link svg { width: 12px; height: 12px; }
 
-  /* Sections */
-  section { padding: 96px 0; border-top: 1px solid var(--rule); }
-  .sec-head {
-    display: grid; grid-template-columns: 220px 1fr; gap: 32px; margin-bottom: 48px;
-  }
-  .sec-head .mono { color: var(--muted); padding-top: 10px; }
-  .sec-head h2 { font-weight: 300; font-size: clamp(32px, 4.5vw, 48px); line-height: 1.1; letter-spacing: -0.02em; }
-  .sec-head h2 em { color: var(--accent); }
-
-  /* Projects */
-  .projects { list-style: none; border-top: 1px solid var(--ink); }
-  .project {
-    display: grid; grid-template-columns: 220px 1fr; gap: 32px;
-    padding: 40px 0; border-bottom: 1px solid var(--rule);
-    position: relative;
-  }
-  .project .idx { color: var(--muted); }
-  .project .idx b { display: block; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
-  .project h3 {
-    font-weight: 400; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.1;
-    letter-spacing: -0.015em; margin-bottom: 14px;
-    transition: color .25s ease;
-  }
-  .project:hover h3 { color: var(--accent); }
-  .project p { color: var(--muted); max-width: 62ch; font-size: 17px; }
-  .project .stack { margin-top: 18px; color: var(--muted); }
-  .links { display: flex; gap: 24px; margin-top: 22px; flex-wrap: wrap; }
-  .links a {
-    text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px;
-    transition: color .2s ease;
-  }
-  .links a:hover { color: var(--accent); }
-  .links a::after { content: " \2197"; }
-
-  /* Earlier work */
-  .earlier { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; }
-  .earlier li { border-bottom: 1px solid var(--rule); }
-  .earlier a {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
-    padding: 18px 0; text-decoration: none;
-  }
-  .earlier a span:first-child { font-size: 20px; }
-  .earlier a:hover span:first-child { color: var(--accent); }
-  .earlier .mono { color: var(--muted); white-space: nowrap; }
-  .indent { margin-left: 252px; }
-
-  /* Toolkit */
-  .toolkit { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-  .toolkit h4 { font-family: var(--mono); font-weight: 500; font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-  .toolkit ul { list-style: none; }
-  .toolkit li { padding: 4px 0; }
+  /* Archive */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 560px; }
+  .archive { list-style: none; margin-top: 8px; }
+  .archive a { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); transition: color .2s; }
+  .archive a:hover { color: var(--accent); }
+  .archive small { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; padding-top: 3px; }
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; margin-top: 18px; }
+  .tool-grid h4 { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 4px; }
+  .tool-grid p { font-size: 14px; color: var(--body); }
+  .h-sm { font-family: var(--display); font-weight: 600; font-size: 20px; margin: 44px 0 0; letter-spacing: -.01em; }
 
   /* Contact */
-  .contact { padding: 120px 0 64px; border-top: 1px solid var(--ink); }
-  .contact .mono { color: var(--muted); }
-  .contact h2 {
-    font-weight: 300; font-size: clamp(44px, 8vw, 104px); line-height: 1;
-    letter-spacing: -0.03em; margin: 20px 0 40px;
-  }
-  .contact h2 em { color: var(--accent); }
-  .email {
-    font-size: clamp(22px, 3.6vw, 40px); text-decoration: none;
-    border-bottom: 2px solid var(--accent); padding-bottom: 4px;
-    word-break: break-all;
-  }
-  .email:hover { color: var(--accent); }
-  .contact .links { margin-top: 48px; }
+  .contact { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 0 40px; }
+  .contact-inner { text-align: center; }
+  .contact h2 { font-family: var(--display); font-weight: 600; font-size: clamp(40px, 6vw, 80px); letter-spacing: -.035em; line-height: 1.02; margin: 16px 0 22px; }
+  .contact p { color: var(--body); margin-bottom: 34px; }
+  .mail { font-family: var(--display); font-weight: 500; font-size: clamp(22px, 3vw, 34px); letter-spacing: -.01em; border-bottom: 1px solid var(--accent); padding-bottom: 6px; transition: color .25s; word-break: break-all; }
+  .mail:hover { color: var(--accent); }
+  .contact .links { justify-content: center; margin-top: 44px; }
+  footer { display: flex; justify-content: space-between; margin-top: 110px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 
-  footer.end {
-    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-    padding: 28px 0 40px; border-top: 1px solid var(--rule); color: var(--muted);
-  }
+  /* Progress */
+  .rail { position: fixed; right: 28px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; gap: 12px; }
+  .rail a { display: block; width: 18px; height: 2px; background: rgba(255,255,255,.18); transition: width .4s, background .4s; margin-left: auto; }
+  .rail a.on { width: 32px; background: var(--accent); }
 
-  @media (max-width: 860px) {
-    .wrap { padding: 0 20px; }
-    header.bar nav { gap: 16px; }
-    header.bar nav a.hide-sm { display: none; }
-    .hero { padding: 72px 0 56px; }
-    .hero-meta { grid-template-columns: 1fr; gap: 40px; margin-top: 44px; }
-    .hero-meta p { font-size: 20px; }
-    .trace { margin-top: 48px; height: 56px; }
-    section { padding: 64px 0; }
-    .sec-head, .project { grid-template-columns: 1fr; gap: 12px; }
-    .project { padding: 32px 0; }
-    .project .idx b { display: inline; margin-right: 10px; }
-    .earlier { grid-template-columns: 1fr; }
-    .indent { margin-left: 0; }
-    .toolkit { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
-    .contact { padding: 80px 0 48px; }
+  @media (max-width: 900px) {
+    .wrap { padding: 0 22px; }
+    header .wrap { height: 62px; }
+    header nav { gap: 20px; font-size: 13px; }
+    .rail { display: none; }
+    .hero { align-items: flex-end; padding: 46vh 0 64px; }
+    .chapter { align-items: flex-end; padding: 50vh 0 80px; min-height: 100vh; }
+    .project, .archive-block { background: rgba(7,8,12,.82); border: 1px solid var(--line); border-radius: 14px; padding: 26px 22px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .split { grid-template-columns: 1fr; gap: 0; }
+    .contact { padding-bottom: 28px; }
+    footer { flex-direction: column; gap: 4px; align-items: center; margin-top: 70px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-    .trace path { stroke-dashoffset: 0; }
-    .trace circle { opacity: 1; }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .project { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header class="bar mono">
-    <span class="status"><i></i>Open to work</span>
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="shade"></div>
+
+<header id="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top">Sabbir Saown</a>
     <nav>
       <a href="#work">Work</a>
-      <a href="#toolkit" class="hide-sm">Toolkit</a>
+      <a href="#archive">Archive</a>
       <a href="#contact">Contact</a>
     </nav>
-  </header>
-
-  <div class="hero">
-    <h1>Sabbir<br><em>Saown</em></h1>
-
-    <div class="hero-meta">
-      <p>Data analyst in London. I build models, dashboards and small tools that turn messy data into decisions.</p>
-      <ul class="facts mono">
-        <li><span>Based</span><span>London, UK</span></li>
-        <li><span>Local time</span><span id="clock">--:--</span></li>
-        <li><span>Focus</span><span>Analytics · ML · BI</span></li>
-      </ul>
-    </div>
-
-    <svg class="trace" viewBox="0 0 1000 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,52 C60,50 90,58 140,54 S220,30 270,36 330,62 390,58 450,22 520,26 590,60 650,52 720,40 780,44 850,18 910,24 960,30 1000,28"/>
-      <circle cx="1000" cy="28" r="4"/>
-    </svg>
   </div>
-</div>
+</header>
 
-<section id="work">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="mono">Selected work</span>
-      <h2>Six projects, from data <em>pipelines</em> to the people who use them.</h2>
+<nav class="rail" id="rail" aria-label="Sections"></nav>
+
+<main>
+  <section class="hero" id="top" data-shape="galaxy" data-label="Intro">
+    <div class="wrap">
+      <div class="hero-text">
+        <div class="status label"><i></i>Data analyst · London · Open to work</div>
+        <h1>Sabbir<br><span>Saown</span></h1>
+        <p class="lede">I turn messy data into <strong>models, dashboards and tools</strong> that people actually use, from quantitative finance to NLP to automation.</p>
+        <div class="actions">
+          <a class="btn primary" href="#work">View work</a>
+          <a class="btn ghost" href="mailto:saowns02@gmail.com">Get in touch
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <ol class="projects">
-      <li class="project">
-        <div class="idx mono"><b>01</b>Cloud · Geospatial</div>
-        <div>
-          <h3>5G Explorer</h3>
-          <p>A three-tier web app that maps reported 5G availability on an interactive 3D globe. Deployed both natively and on OpenStack to compare the two, with load tests and a CI/CD pipeline.</p>
-          <div class="stack mono">React · FastAPI · PostgreSQL / PostGIS · OpenStack · Locust · Jenkins</div>
-          <div class="links mono">
-            <a href="https://github.com/saowns02/5g-explorer_v3" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </li>
-
-      <li class="project">
-        <div class="idx mono"><b>02</b>Data visualisation</div>
-        <div>
-          <h3>Religion &amp; State Atlas</h3>
-          <p>An interactive globe for exploring religious restrictions across modern countries and historical polities, joining Pew Research data with the Seshat Global History Databank and Cliopatria borders.</p>
-          <div class="stack mono">React · Plotly.js · Tailwind · GeoPandas · Shapely</div>
-          <div class="links mono">
-            <a href="https://religion-variable-dashboard.vercel.app" target="_blank" rel="noopener">Live site</a>
-            <a href="https://github.com/saowns02/religion-variable-dashboard" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </li>
-
-      <li class="project">
-        <div class="idx mono"><b>03</b>Process automation</div>
-        <div>
-          <h3>Table Card Automation</h3>
-          <p>Reads raw kitchen CSVs, pulls out guest orders and allergy notes, fills a Word template and merges everything into one print-ready file. An hour of copy-pasting became two minutes.</p>
-          <div class="stack mono">Python · Flask · Word automation</div>
-          <div class="links mono">
-            <a href="https://saowns.pythonanywhere.com/login" target="_blank" rel="noopener">Live site</a>
-            <a href="https://github.com/saowns02/Table-Card-Automation" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </li>
-
-      <li class="project">
-        <div class="idx mono"><b>04</b>Quantitative finance</div>
-        <div>
-          <h3>Obsidian Analytics</h3>
-          <p>A portfolio terminal for backtesting, risk analysis and wealth-trajectory modelling: Modern Portfolio Theory optimisation, correlation analysis and Geometric Brownian Motion forecasts.</p>
-          <div class="stack mono">R · Shiny · plotly</div>
-          <div class="links mono">
-            <a href="https://saownie.shinyapps.io/stock_analysis_project/" target="_blank" rel="noopener">Live site</a>
-            <a href="https://github.com/saowns02/stock-analysis-portfolio" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </li>
-
-      <li class="project">
-        <div class="idx mono"><b>05</b>Machine learning · NLP</div>
-        <div>
-          <h3>BERT Fake News Classifier</h3>
-          <p>Final-year project. Fine-tuned Google's BERT to separate genuine news from likely misinformation, served through a Flask app with user accounts and a feedback loop on predictions.</p>
-          <div class="stack mono">Python · Hugging Face Transformers · PyTorch · scikit-learn · Flask</div>
-          <div class="links mono">
-            <a href="https://github.com/saowns02/BERT-news-classifier" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </li>
-
-      <li class="project">
-        <div class="idx mono"><b>06</b>Dashboarding</div>
-        <div>
-          <h3>Election Night Dashboard</h3>
-          <p>A broadcast-style election-night prototype for Bangladesh: district map, live seat tally and a close-races table, driven by simulated counting data.</p>
-          <div class="stack mono">Python · Streamlit · Plotly · GeoPandas</div>
-          <div class="links mono">
-            <a href="https://github.com/saowns02/Election-Dashboard" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="mono">Earlier work</span>
-      <h2>Smaller builds and coursework.</h2>
-    </div>
-    <ul class="earlier indent">
-      <li><a href="https://github.com/saowns02/Hounslow-Accident-Data-analytics" target="_blank" rel="noopener"><span>Hounslow Accident Analysis</span><span class="mono">Python · Jupyter</span></a></li>
-      <li><a href="https://github.com/saowns02/Data-analysis-with-python" target="_blank" rel="noopener"><span>Property Price Analysis</span><span class="mono">Python · pandas</span></a></li>
-      <li><a href="https://github.com/saowns02/Weather-App-Flask" target="_blank" rel="noopener"><span>Weather App</span><span class="mono">Flask</span></a></li>
-      <li><a href="https://github.com/saowns02/Spotify-Tracker" target="_blank" rel="noopener"><span>Spotify Tracker</span><span class="mono">Python</span></a></li>
-    </ul>
-  </div>
-</section>
-
-<section id="toolkit">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="mono">Toolkit</span>
-      <h2>What I work with.</h2>
-    </div>
-    <div class="toolkit indent">
-      <div><h4>Languages</h4><ul><li>Python</li><li>SQL</li><li>R</li><li>JavaScript</li></ul></div>
-      <div><h4>Data</h4><ul><li>pandas &amp; Polars</li><li>PostgreSQL</li><li>Snowflake</li><li>GeoPandas</li></ul></div>
-      <div><h4>Modelling</h4><ul><li>scikit-learn</li><li>LightGBM</li><li>Transformers</li><li>PyTorch</li></ul></div>
-      <div><h4>Delivery</h4><ul><li>Tableau &amp; Power BI</li><li>Flask &amp; FastAPI</li><li>Shiny &amp; Streamlit</li><li>AWS</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<div class="wrap">
-  <div class="contact" id="contact">
-    <span class="mono">Contact</span>
-    <h2>Have data that needs<br>a <em>second look?</em></h2>
-    <a class="email" href="mailto:saowns02@gmail.com">saowns02@gmail.com</a>
-    <div class="links mono">
-      <a href="https://www.linkedin.com/in/sabbir-saown-b97545225/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/saowns02" target="_blank" rel="noopener">GitHub</a>
-    </div>
+  <div class="wrap intro" id="work">
+    <div class="label">Selected work</div>
+    <h2>Six projects, each rendered as its own data form.</h2>
   </div>
 
-  <footer class="end mono">
-    <span>Sabbir Saown</span>
-    <span>London, UK</span>
-  </footer>
-</div>
+  <section class="chapter" data-shape="globe" data-label="01">
+    <div class="wrap">
+      <article class="project">
+        <div class="label"><b>01</b><span>Cloud · Geospatial</span></div>
+        <h3>5G Explorer</h3>
+        <p>A three-tier web app that maps reported 5G availability on an interactive 3D globe. Deployed both natively and on OpenStack to compare the two, with load tests and a CI/CD pipeline.</p>
+        <div class="tags"><span>React</span><span>FastAPI</span><span>PostGIS</span><span>OpenStack</span><span>Locust</span><span>Jenkins</span></div>
+        <div class="links">
+            <a class="link" href="https://github.com/saowns02/5g-explorer_v3" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="chapter" data-shape="armillary" data-label="02">
+    <div class="wrap">
+      <article class="project">
+        <div class="label"><b>02</b><span>Data visualisation</span></div>
+        <h3>Religion &amp; State Atlas</h3>
+        <p>An interactive globe for exploring religious restrictions across modern countries and historical polities, joining Pew Research data with the Seshat Global History Databank and Cliopatria borders.</p>
+        <div class="tags"><span>React</span><span>Plotly.js</span><span>Tailwind</span><span>GeoPandas</span><span>Shapely</span></div>
+        <div class="links">
+            <a class="link" href="https://religion-variable-dashboard.vercel.app" target="_blank" rel="noopener">Live site <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+            <a class="link" href="https://github.com/saowns02/religion-variable-dashboard" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="chapter" data-shape="cards" data-label="03">
+    <div class="wrap">
+      <article class="project">
+        <div class="label"><b>03</b><span>Process automation</span></div>
+        <h3>Table Card Automation</h3>
+        <p>Reads raw kitchen CSVs, pulls out guest orders and allergy notes, fills a Word template and merges everything into one print-ready file. An hour of copy-pasting became two minutes.</p>
+        <div class="tags"><span>Python</span><span>Flask</span><span>Word automation</span></div>
+        <div class="links">
+            <a class="link" href="https://saowns.pythonanywhere.com/login" target="_blank" rel="noopener">Live site <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+            <a class="link" href="https://github.com/saowns02/Table-Card-Automation" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="chapter" data-shape="candles" data-label="04">
+    <div class="wrap">
+      <article class="project">
+        <div class="label"><b>04</b><span>Quantitative finance</span></div>
+        <h3>Obsidian Analytics</h3>
+        <p>A portfolio terminal for backtesting, risk analysis and wealth-trajectory modelling: Modern Portfolio Theory optimisation, correlation analysis and Geometric Brownian Motion forecasts.</p>
+        <div class="tags"><span>R</span><span>Shiny</span><span>plotly</span></div>
+        <div class="links">
+            <a class="link" href="https://saownie.shinyapps.io/stock_analysis_project/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+            <a class="link" href="https://github.com/saowns02/stock-analysis-portfolio" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="chapter" data-shape="neural" data-label="05">
+    <div class="wrap">
+      <article class="project">
+        <div class="label"><b>05</b><span>Machine learning · NLP</span></div>
+        <h3>BERT Fake News Classifier</h3>
+        <p>Final-year project. Fine-tuned Google's BERT to separate genuine news from likely misinformation, served through a Flask app with user accounts and a feedback loop on predictions.</p>
+        <div class="tags"><span>Python</span><span>Transformers</span><span>PyTorch</span><span>scikit-learn</span><span>Flask</span></div>
+        <div class="links">
+            <a class="link" href="https://github.com/saowns02/BERT-news-classifier" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="chapter" data-shape="hemicycle" data-label="06">
+    <div class="wrap">
+      <article class="project">
+        <div class="label"><b>06</b><span>Dashboarding</span></div>
+        <h3>Election Night Dashboard</h3>
+        <p>A broadcast-style election-night prototype for Bangladesh: district map, live seat tally and a close-races table, driven by simulated counting data.</p>
+        <div class="tags"><span>Python</span><span>Streamlit</span><span>Plotly</span><span>GeoPandas</span></div>
+        <div class="links">
+            <a class="link" href="https://github.com/saowns02/Election-Dashboard" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="chapter" id="archive" data-shape="terrain" data-label="Archive">
+    <div class="wrap">
+      <div class="project archive-block" style="max-width:560px">
+        <div class="label"><b>Archive</b><span>Earlier work &amp; toolkit</span></div>
+        <h3>Smaller builds</h3>
+        <ul class="archive">
+          <li><a href="https://github.com/saowns02/Hounslow-Accident-Data-analytics" target="_blank" rel="noopener"><span>Hounslow Accident Analysis</span><small>Python · Jupyter</small></a></li>
+          <li><a href="https://github.com/saowns02/Data-analysis-with-python" target="_blank" rel="noopener"><span>Property Price Analysis</span><small>Python · pandas</small></a></li>
+          <li><a href="https://github.com/saowns02/Weather-App-Flask" target="_blank" rel="noopener"><span>Weather App</span><small>Flask</small></a></li>
+          <li><a href="https://github.com/saowns02/Spotify-Tracker" target="_blank" rel="noopener"><span>Spotify Tracker</span><small>Python</small></a></li>
+        </ul>
+        <h4 class="h-sm">Toolkit</h4>
+        <div class="tool-grid">
+          <div><h4>Languages</h4><p>Python, SQL, R, JavaScript</p></div>
+          <div><h4>Data</h4><p>pandas, Polars, PostgreSQL, Snowflake</p></div>
+          <div><h4>Modelling</h4><p>scikit-learn, LightGBM, Transformers</p></div>
+          <div><h4>Delivery</h4><p>Tableau, Power BI, Flask, Shiny, AWS</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" data-shape="torus" data-label="Contact">
+    <div class="wrap">
+      <div class="contact-inner">
+        <div class="label">Contact</div>
+        <h2>Let's work together.</h2>
+        <p>Have data that needs a second look? I'd like to hear about it.</p>
+        <a class="mail" href="mailto:saowns02@gmail.com">saowns02@gmail.com</a>
+        <div class="links">
+          <a class="link" href="https://www.linkedin.com/in/sabbir-saown-b97545225/" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+          <a class="link" href="https://github.com/saowns02" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        </div>
+      </div>
+      <footer><span>© Sabbir Saown</span><span>London, UK</span></footer>
+    </div>
+  </section>
+</main>
 
 <script>
-  (function () {
-    var el = document.getElementById('clock');
-    function tick() {
-      try {
-        el.textContent = new Date().toLocaleTimeString('en-GB', {
-          hour: '2-digit', minute: '2-digit', timeZone: 'Europe/London'
-        });
-      } catch (e) {}
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('field');
+  var ctx = canvas.getContext('2d');
+  var W = 0, H = 0, DPR = 1, mobile = false, N = 0;
+
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  // Restrained palette
+  var CYAN = [103, 232, 249], VIOLET = [129, 140, 248], CORAL = [251, 146, 110], WHITE = [226, 232, 245];
+  var GREEN = [74, 222, 160], RED = [248, 113, 133], GOLD = [250, 204, 120], GREY = [110, 118, 138];
+  function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+  function makeShape(n, o) {
+    return { p: new Float32Array(n * 3), c: o.colored ? new Float32Array(n * 3) : null, mode: o.mode || 'spin', tilt: o.tilt || 0, speed: o.speed || 1, kind: o.kind || 'solid' };
+  }
+  function setC(s, i, col) { s.c[i * 3] = col[0]; s.c[i * 3 + 1] = col[1]; s.c[i * 3 + 2] = col[2]; }
+  function rotPt(x, y, z, ax, az) {
+    var c = Math.cos(ax), s = Math.sin(ax), y1 = y * c - z * s, z1 = y * s + z * c;
+    c = Math.cos(az); s = Math.sin(az);
+    return [x * c - y1 * s, x * s + y1 * c, z1];
+  }
+
+  function galaxy(n) {
+    var s = makeShape(n, { tilt: 1.05, speed: 0.45, colored: true }), r = rng(3);
+    for (var i = 0; i < n; i++) {
+      var x, y, z, col;
+      if (r() < 0.16) {
+        var g = Math.sqrt(-2 * Math.log(r() + 1e-6)) * 0.16, a0 = r() * 6.283;
+        x = Math.cos(a0) * g; z = Math.sin(a0) * g; y = (r() - .5) * 0.18 * (1 - g);
+        col = mix(WHITE, GOLD, r() * 0.6);
+      } else {
+        var arm = i % 3, t = Math.pow(r(), 0.75) * 1.35 + 0.08;
+        var ang = arm * 2.094 + t * 3.4 + (r() - .5) * 0.5 / (t + 0.4);
+        var spread = 0.07 * (1 + t);
+        x = Math.cos(ang) * t + (r() - .5) * spread; z = Math.sin(ang) * t + (r() - .5) * spread;
+        y = (r() - .5) * 0.06;
+        col = mix(CYAN, VIOLET, Math.min(1, t / 1.3));
+      }
+      s.p[i * 3] = x; s.p[i * 3 + 1] = y; s.p[i * 3 + 2] = z; setC(s, i, col);
     }
-    tick();
-    setInterval(tick, 15000);
-  })();
+    return s;
+  }
+
+  function torus(n) {
+    var s = makeShape(n, { tilt: 1.1, speed: 0.5, colored: true }), r = rng(9);
+    for (var i = 0; i < n; i++) {
+      var u = r() * 6.283, v = r() * 6.283, R = 1.0, rr = 0.34;
+      var x = (R + rr * Math.cos(v)) * Math.cos(u), z = (R + rr * Math.cos(v)) * Math.sin(u), y = rr * Math.sin(v);
+      s.p[i * 3] = x; s.p[i * 3 + 1] = y; s.p[i * 3 + 2] = z;
+      setC(s, i, mix(CYAN, VIOLET, (Math.sin(u * 2) + 1) / 2));
+    }
+    return s;
+  }
+
+  function globe(n) {
+    var s = makeShape(n, { tilt: 0.35, speed: 1, colored: true }), r = rng(11);
+    var core = Math.floor(n * 0.74);
+    for (var i = 0; i < n; i++) {
+      var x, y, z, col;
+      if (i < core) {
+        var phi = Math.acos(1 - 2 * (i + .5) / core), th = Math.PI * (1 + Math.sqrt(5)) * i;
+        x = Math.cos(th) * Math.sin(phi); y = Math.cos(phi); z = Math.sin(th) * Math.sin(phi);
+        col = mix(CYAN, VIOLET, (y + 1) / 2);
+      } else {
+        var ring = i % 3, a = r() * Math.PI * 2, rad = 1.28 + ring * 0.14;
+        var q = rotPt(Math.cos(a) * rad, 0, Math.sin(a) * rad, 0.5 + ring * 0.7, ring * 1.1);
+        x = q[0]; y = q[1]; z = q[2];
+        col = ring === 0 ? CORAL : WHITE;
+      }
+      s.p[i * 3] = x; s.p[i * 3 + 1] = y; s.p[i * 3 + 2] = z; setC(s, i, col);
+    }
+    return s;
+  }
+
+  function armillary(n) {
+    var s = makeShape(n, { tilt: 0.25, speed: 0.7, colored: true }), r = rng(23);
+    for (var i = 0; i < n; i++) {
+      var u = r(), x, y, z, col;
+      if (u < 0.55) {
+        var k = i % 6, a = r() * Math.PI * 2;
+        var q = rotPt(Math.cos(a), 0, Math.sin(a), k * Math.PI / 6, k * 0.55);
+        x = q[0]; y = q[1]; z = q[2]; col = [VIOLET, CYAN, WHITE][k % 3];
+      } else if (u < 0.8) {
+        var ph = Math.acos(2 * r() - 1), th = r() * Math.PI * 2, rr = 0.32 * Math.cbrt(r());
+        x = rr * Math.sin(ph) * Math.cos(th); y = rr * Math.cos(ph); z = rr * Math.sin(ph) * Math.sin(th);
+        col = GOLD;
+      } else {
+        var b = r() * Math.PI * 2, rad = 1.3 + (r() - .5) * 0.12;
+        x = Math.cos(b) * rad; y = (r() - .5) * 0.04; z = Math.sin(b) * rad; col = CORAL;
+      }
+      s.p[i * 3] = x; s.p[i * 3 + 1] = y; s.p[i * 3 + 2] = z; setC(s, i, col);
+    }
+    return s;
+  }
+
+  function cards(n) {
+    var s = makeShape(n, { mode: 'sway', tilt: 0.2, colored: true }), r = rng(37);
+    var cw = 1.0, ch = 1.36;
+    var rowLen = []; for (var j = 0; j < 10; j++) rowLen.push(0.35 + r() * 0.5);
+    for (var i = 0; i < n; i++) {
+      var k = i % 3, ox = (k - 1) * 0.42, oy = (1 - k) * 0.24, oz = (k - 1) * 0.5;
+      var x, y, col = mix(CYAN, VIOLET, k / 2);
+      if (r() < 0.3) {
+        var t = r() * 2 * (cw + ch);
+        if (t < cw) { x = t; y = 0; } else if (t < cw + ch) { x = cw; y = t - cw; }
+        else if (t < 2 * cw + ch) { x = 2 * cw + ch - t; y = ch; } else { x = 0; y = 2 * (cw + ch) - t; }
+        x -= cw / 2; y -= ch / 2; col = WHITE;
+      } else {
+        var row = Math.floor(r() * 10), len = rowLen[row] * (row === 0 ? 0.9 : 1);
+        x = -cw / 2 + 0.12 + r() * (cw - 0.24) * len;
+        y = -ch / 2 + 0.16 + row * 0.115 + (r() - .5) * (row === 0 ? 0.05 : 0.018);
+        if (row === 4 && k === 2) col = CORAL;
+      }
+      s.p[i * 3] = x + ox; s.p[i * 3 + 1] = y + oy; s.p[i * 3 + 2] = oz; setC(s, i, col);
+    }
+    return s;
+  }
+
+  function candles(n) {
+    var s = makeShape(n, { mode: 'flat', colored: true }), r = rng(51);
+    var C = 30, price = 0, cs = [];
+    for (var j = 0; j < C; j++) {
+      var o = price, d = (r() - .45) * 0.22, cl = o + d;
+      cs.push({ o: o, c: cl, h: Math.max(o, cl) + r() * 0.08, l: Math.min(o, cl) - r() * 0.08 });
+      price = cl;
+    }
+    var mn = Infinity, mx = -Infinity;
+    cs.forEach(function (q) { mn = Math.min(mn, q.l); mx = Math.max(mx, q.h); });
+    function Y(v) { return 0.8 - (v - mn) / (mx - mn) * 1.6; }
+    var span = 2.6, step = span / C;
+    for (var i = 0; i < n; i++) {
+      var x, y, col, u = r();
+      if (u < 0.18) {
+        var t = r() * (C - 1), a = Math.floor(t), f = t - a;
+        var v = (cs[a].c * (1 - f) + cs[Math.min(a + 1, C - 1)].c * f);
+        x = -span / 2 + (t + .5) * step; y = Y(v) - 0.06; col = GOLD;
+      } else {
+        var q = cs[Math.floor(r() * C)], idx = cs.indexOf(q), cx = -span / 2 + (idx + .5) * step;
+        col = q.c >= q.o ? GREEN : RED;
+        if (r() < 0.22) { x = cx; y = Y(q.l) + (Y(q.h) - Y(q.l)) * r(); }
+        else { x = cx + (r() - .5) * step * 0.62; y = Y(q.o) + (Y(q.c) - Y(q.o)) * r(); }
+      }
+      s.p[i * 3] = x; s.p[i * 3 + 1] = y; s.p[i * 3 + 2] = (r() - .5) * 0.1; setC(s, i, col);
+    }
+    return s;
+  }
+
+  function neural(n) {
+    var s = makeShape(n, { mode: 'sway', colored: true }), r = rng(67);
+    var layers = [4, 6, 6, 3], nodes = [];
+    layers.forEach(function (cnt, li) {
+      var L = [];
+      for (var j = 0; j < cnt; j++) L.push([-1.3 + li * 0.867, (j - (cnt - 1) / 2) * (1.7 / Math.max(cnt - 1, 1)) * (cnt > 3 ? 1 : 0.6), (r() - .5) * 0.3]);
+      nodes.push(L);
+    });
+    var edges = [];
+    for (var l = 0; l < layers.length - 1; l++)
+      nodes[l].forEach(function (A) { nodes[l + 1].forEach(function (B) { if (r() < 0.55) edges.push([A, B]); }); });
+    for (var i = 0; i < n; i++) {
+      var x, y, z, col;
+      if (r() < 0.45) {
+        var li = Math.floor(r() * layers.length), nd = nodes[li][Math.floor(r() * layers[li])];
+        var ph = Math.acos(2 * r() - 1), th = r() * 6.283, rr = 0.06;
+        x = nd[0] + rr * Math.sin(ph) * Math.cos(th); y = nd[1] + rr * Math.cos(ph); z = nd[2] + rr * Math.sin(ph) * Math.sin(th);
+        col = li === layers.length - 1 ? CORAL : WHITE;
+      } else {
+        var e = edges[Math.floor(r() * edges.length)], A = e[0], B = e[1], t = r();
+        x = A[0] + (B[0] - A[0]) * t; y = A[1] + (B[1] - A[1]) * t; z = A[2] + (B[2] - A[2]) * t;
+        col = mix(VIOLET, CYAN, t);
+      }
+      s.p[i * 3] = x; s.p[i * 3 + 1] = y; s.p[i * 3 + 2] = z; setC(s, i, col);
+    }
+    return s;
+  }
+
+  function hemicycle(n) {
+    var s = makeShape(n, { mode: 'flat', colored: true }), r = rng(79);
+    var rows = 9, seats = [], total = 300, radii = [], sum = 0;
+    for (var j = 0; j < rows; j++) { radii.push(0.5 + j * 0.09); sum += radii[j]; }
+    radii.forEach(function (rad) {
+      var k = Math.round(total * rad / sum);
+      for (var m = 0; m < k; m++) seats.push({ a: Math.PI - (m + .5) / k * Math.PI, r: rad });
+    });
+    seats.sort(function (a, b) { return b.a - a.a; });
+    var parties = [[0.46, CYAN], [0.29, CORAL], [0.12, VIOLET], [0.08, GOLD], [0.05, GREY]];
+    seats.forEach(function (st, idx) {
+      var f = idx / seats.length, acc = 0;
+      for (var p = 0; p < parties.length; p++) { acc += parties[p][0]; if (f < acc) { st.col = parties[p][1]; break; } }
+      if (!st.col) st.col = GREY;
+    });
+    for (var i = 0; i < n; i++) {
+      var st = seats[i % seats.length], a = r() * 6.283, d = Math.sqrt(r()) * 0.026;
+      s.p[i * 3] = Math.cos(st.a) * st.r + Math.cos(a) * d;
+      s.p[i * 3 + 1] = -Math.sin(st.a) * st.r + Math.sin(a) * d + 0.5;
+      s.p[i * 3 + 2] = (r() - .5) * 0.06;
+      setC(s, i, st.col);
+    }
+    return s;
+  }
+
+  function terrain(n) {
+    var s = makeShape(n, { tilt: 0.55, speed: 0.5, colored: true }), r = rng(97);
+    function h(x, z) { return 0.3 * Math.sin(2.2 * x) * Math.cos(1.7 * z) + 0.14 * Math.sin(3.4 * z + 1) + 0.08 * Math.cos(4 * x + 2 * z); }
+    var G = 26;
+    for (var i = 0; i < n; i++) {
+      var x, z, line = Math.floor(r() * G), t = r() * 2.8 - 1.4;
+      var lv = -1.4 + line * 2.8 / (G - 1);
+      if (i % 2) { x = lv; z = t; } else { x = t; z = lv; }
+      var y = h(x, z);
+      s.p[i * 3] = x; s.p[i * 3 + 1] = -y; s.p[i * 3 + 2] = z;
+      var tt = (y + 0.5) / 1.0;
+      setC(s, i, tt < 0.5 ? mix(VIOLET, CYAN, tt * 2) : mix(CYAN, CORAL, (tt - .5) * 2));
+    }
+    return s;
+  }
+
+  var px, py, vx, vy, cr, cg, cb, kk, sz;
+  var shapes = {}, current = 'galaxy', shape = null;
+  var ang = 0, mouse = { x: -9999, y: -9999, nx: 0.5, ny: 0.5, sx: 0.5, sy: 0.5 };
+
+  function alloc() {
+    px = new Float32Array(N); py = new Float32Array(N); vx = new Float32Array(N); vy = new Float32Array(N);
+    cr = new Float32Array(N); cg = new Float32Array(N); cb = new Float32Array(N);
+    kk = new Float32Array(N); sz = new Float32Array(N);
+    var r = rng(5);
+    for (var i = 0; i < N; i++) {
+      cr[i] = CYAN[0]; cg[i] = CYAN[1]; cb[i] = CYAN[2];
+      kk[i] = 0.01 + r() * 0.025;
+      sz[i] = 0.6 + r() * 0.9;
+      var a = r() * 6.283, d = r() * 30;
+      px[i] = W * (mobile ? 0.5 : 0.7) + Math.cos(a) * d; py[i] = H * (mobile ? 0.25 : 0.5) + Math.sin(a) * d;
+      vx[i] = Math.cos(a) * (4 + r() * 16); vy[i] = Math.sin(a) * (4 + r() * 16);
+    }
+  }
+  function buildShapes() {
+    shapes = {
+      galaxy: galaxy(N), globe: globe(N), armillary: armillary(N), cards: cards(N), candles: candles(N),
+      neural: neural(N), hemicycle: hemicycle(N), terrain: terrain(N), torus: torus(N)
+    };
+    shape = shapes[current];
+  }
+  var REACH = { galaxy: 1.45, globe: 1.6, armillary: 1.4, cards: 1.25, candles: 1.35, neural: 1.4, hemicycle: 1.25, terrain: 2.0 };
+  function layout() {
+    if (current === 'torus') return mobile ? { cx: W / 2, cy: H * 0.22, S: Math.min(W * 0.26, H * 0.12) } : { cx: W / 2, cy: H * 0.24, S: Math.min(W * 0.13, H * 0.16) };
+    if (mobile) return { cx: W / 2, cy: H * 0.26, S: Math.min(W * 0.27, H * 0.14) };
+    var textRight = (W - Math.min(W, 1200)) / 2 + 40 + (current === 'terrain' ? 590 : 500);
+    var room = W - textRight - 60;
+    return { cx: textRight + 30 + room / 2, cy: H * 0.5, S: Math.max(80, Math.min(room / 2 / (REACH[current] || 1.4), H * 0.3)) };
+  }
+  function resize() {
+    W = window.innerWidth; H = window.innerHeight; DPR = Math.min(window.devicePixelRatio || 1, 2);
+    mobile = W < 900;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    var want = mobile ? 1300 : 2400;
+    if (want !== N) { N = want; alloc(); buildShapes(); }
+    ctx.fillStyle = '#07080c'; ctx.fillRect(0, 0, W, H);
+  }
+  function setShape(name) {
+    if (!shapes[name] || name === current) return;
+    current = name; shape = shapes[name];
+    if (reduce) return;
+    for (var i = 0; i < N; i++) { var a = Math.random() * 6.283, f = 1 + Math.random() * 5; vx[i] += Math.cos(a) * f; vy[i] += Math.sin(a) * f; }
+  }
+
+  var last = 0, t = 0;
+  function frame(now) {
+    var dt = Math.min((now - last) / 16.67, 3); last = now; t += dt;
+    mouse.sx += (mouse.nx - mouse.sx) * 0.04; mouse.sy += (mouse.ny - mouse.sy) * 0.04;
+    var L = layout(), s = shape, P = s.p, Cc = s.c, ry, rx;
+    if (s.mode === 'spin') { ang += 0.003 * s.speed * dt; ry = ang + (mouse.sx - .5) * 0.6; rx = s.tilt + (mouse.sy - .5) * 0.35; }
+    else if (s.mode === 'sway') { ry = Math.sin(t * 0.007) * 0.45 + (mouse.sx - .5) * 0.5; rx = s.tilt + (mouse.sy - .5) * 0.3; }
+    else { ry = (mouse.sx - .5) * 0.3; rx = (mouse.sy - .5) * 0.2; }
+    if (reduce) { ry = s.mode === 'spin' ? 0.6 : 0; rx = s.tilt; }
+    var cyr = Math.cos(ry), syr = Math.sin(ry), cxr = Math.cos(rx), sxr = Math.sin(rx);
+
+    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+    ctx.fillStyle = reduce ? '#07080c' : 'rgba(7,8,12,0.34)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    var R = mobile ? 60 : 90, R2 = R * R, mx = mouse.x, my = mouse.y, damp = Math.pow(0.86, dt);
+    for (var i = 0; i < N; i++) {
+      var j = i * 3, x = P[j], y = P[j + 1], z = P[j + 2];
+      if (!reduce) { var w = t * 0.015 + i; x += Math.sin(w) * 0.004; y += Math.cos(w * 1.3) * 0.004; }
+      var x1 = x * cyr - z * syr, z1 = z * cyr + x * syr;
+      var y2 = y * cxr - z1 * sxr, z2 = z1 * cxr + y * sxr;
+      var persp = 3.2 / (3.2 + z2);
+      var tx = L.cx + x1 * L.S * persp, ty = L.cy + y2 * L.S * persp;
+      if (reduce) { px[i] = tx; py[i] = ty; }
+      else {
+        vx[i] += (tx - px[i]) * kk[i] * dt; vy[i] += (ty - py[i]) * kk[i] * dt;
+        var dx = px[i] - mx, dy = py[i] - my, d2 = dx * dx + dy * dy;
+        if (d2 < R2 && d2 > 0.01) { var d = Math.sqrt(d2), f = (1 - d / R) * 3 * dt; vx[i] += dx / d * f; vy[i] += dy / d * f; }
+        vx[i] *= damp; vy[i] *= damp; px[i] += vx[i] * dt; py[i] += vy[i] * dt;
+      }
+      cr[i] += (Cc[j] - cr[i]) * 0.04; cg[i] += (Cc[j + 1] - cg[i]) * 0.04; cb[i] += (Cc[j + 2] - cb[i]) * 0.04;
+      var depth = Math.max(0, Math.min(1, (1.3 - z2) / 2.6));
+      ctx.globalAlpha = 0.18 + depth * 0.6;
+      ctx.fillStyle = 'rgb(' + (cr[i] | 0) + ',' + (cg[i] | 0) + ',' + (cb[i] | 0) + ')';
+      var q = sz[i] * persp * (mobile ? 1.15 : 1.3);
+      ctx.fillRect(px[i] - q / 2, py[i] - q / 2, q, q);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('pointermove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; mouse.nx = e.clientX / W; mouse.ny = e.clientY / H; }, { passive: true });
+  document.addEventListener('pointerout', function (e) { if (!e.relatedTarget) mouse.x = mouse.y = -9999; });
+  window.addEventListener('touchend', function () { mouse.x = mouse.y = -9999; }, { passive: true });
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 150); });
+
+  var hdr = document.getElementById('hdr');
+  window.addEventListener('scroll', function () { hdr.classList.toggle('solid', window.scrollY > 40); }, { passive: true });
+
+  var sections = [].slice.call(document.querySelectorAll('[data-shape]')), rail = document.getElementById('rail');
+  sections.forEach(function (sec, idx) {
+    if (!sec.id) sec.id = 'sec-' + idx;
+    var a = document.createElement('a'); a.href = '#' + sec.id; a.setAttribute('aria-label', sec.dataset.label); rail.appendChild(a);
+  });
+  var railLinks = [].slice.call(rail.children);
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var idx = sections.indexOf(en.target);
+      setShape(en.target.dataset.shape);
+      railLinks.forEach(function (l, k) { l.classList.toggle('on', k === idx); });
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(function (s) { io.observe(s); });
+
+  var pio = new IntersectionObserver(function (es) {
+    es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); pio.unobserve(en.target); } });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.project').forEach(function (p) { pio.observe(p); });
+
+  resize();
+  requestAnimationFrame(function (n) { last = n; frame(n); });
+})();
 </script>
 </body>
 </html>
